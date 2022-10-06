@@ -1,6 +1,7 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use nonspacing_bench::load_and_filter;
 use nonspacing_bench::structure::btree_set::btree_filter;
+use nonspacing_bench::structure::fst::fst_filter;
 use nonspacing_bench::structure::hashset::hashset_filter;
 use nonspacing_bench::structure::naive::naive_filter;
 use nonspacing_bench::structure::roaring_bitmap::roaring_filter;
@@ -20,6 +21,10 @@ fn criterion_benchmark(c: &mut Criterion) {
 
     c.bench_function("HashSet", |b| {
         b.iter(|| load_and_filter(hashset_filter()))
+    });
+
+    c.bench_function("FST", |b| {
+        b.iter(|| load_and_filter(fst_filter()))
     });
 }
 
